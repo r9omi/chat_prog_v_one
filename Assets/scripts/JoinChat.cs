@@ -1,3 +1,4 @@
+using FishNet.Broadcast;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -7,7 +8,17 @@ public class JoinChat : MonoBehaviour
 {
     public TMP_InputField m_userNameInputField;
     public TMP_Text m_textInvalidUser;
-    
+    public GameObject m_msgElement;//message prefab
+    private bool m_connectOrNot = false;
+    public void JoinServer(bool p_connect)
+    {
+
+    }
+    public struct Message : IBroadcast
+    {
+        public string username;
+        public string message;
+    }
     // Start is called before the first frame update
     public void onJoinBtn()
     {
