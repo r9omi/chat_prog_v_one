@@ -1522,14 +1522,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 15
     m_Right: 0
-    m_Top: 0
+    m_Top: 30
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 500, y: 65}
+  m_CellSize: {x: 1300, y: 30}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -3401,8 +3401,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_chatHolder: {fileID: 864044810}
   m_msgElement: {fileID: 3780073255814048181, guid: 604c774b38d27ef4783c9ed7187dc30f, type: 3}
-  m_pm: {fileID: 0}
-  m_pu: {fileID: 0}
   m_playerUsername: 
   m_playerMessage: 
 --- !u!4 &1573665806

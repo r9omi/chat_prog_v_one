@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/scn_login.unity
+    guid: d12a06dd9bfb5aa4195d8c945bf5973d
+  - enabled: 1
+    path: Assets/Scenes/scn_chatroom.unity
+    guid: 9d863367342145a459729595f7431a3b
   m_configObjects: {}

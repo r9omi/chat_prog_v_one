@@ -190,7 +190,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.2441705, g: 0.2550762, b: 0.2924528, a: 0}
+  m_BackGroundColor: {r: 0.062228553, g: 0.06528466, b: 0.0754717, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1309,6 +1309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_userNameInputField: {fileID: 1236403913}
   m_textInvalidUser: {fileID: 1369558487}
+  m_msgElement: {fileID: 0}
 --- !u!1 &1369558486
 GameObject:
   m_ObjectHideFlags: 0

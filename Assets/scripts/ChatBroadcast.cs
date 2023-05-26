@@ -10,13 +10,13 @@ using TMPro;
 using FishNet;
 using FishNet.Broadcast;
 using FishNet.Connection;
-using UnityEditor.VersionControl;
+//using UnityEditor.VersionControl;
 
 public class ChatBroadcast : MonoBehaviour
 {
     public Transform m_chatHolder;//panel to display msgs
     public GameObject m_msgElement;//message prefab
-    public TMP_InputField m_pm,m_pu;    
+    private string m_connectedUserName;
 
     public string m_playerUsername,m_playerMessage;
     
@@ -25,13 +25,20 @@ public class ChatBroadcast : MonoBehaviour
         public string username;
         public string message;
     }
-    //for reciving messages
-    private void OnEnable()
+    public void Awake()
     {
+        m_connectedUserName = JoinChat.m_userName;
+    }
+    
+    //registering call back functions when messages are recived
+    private void OnEnable()    {
+
         InstanceFinder.ClientManager.RegisterBroadcast<Message>(OnMessageRecieved);
+
         InstanceFinder.ServerManager.RegisterBroadcast<Message>(OnClientMessageRecieved);
     }
 
+    //unregister the call back functions
     private void OnDisable()
     {
         if(InstanceFinder.IsClient)
@@ -39,6 +46,7 @@ public class ChatBroadcast : MonoBehaviour
         if(InstanceFinder.IsServer)
         InstanceFinder.ServerManager.UnregisterBroadcast<Message>(OnClientMessageRecieved);
     }
+    //pre-defined text messages are buttons, so when a msg button is cliked this function is called
     public void SendChatMessage(string p_msg)
     {
         Message v_msg = new Message();
@@ -48,41 +56,35 @@ public class ChatBroadcast : MonoBehaviour
 
         if (InstanceFinder.IsServer)
         {
+            v_msg.username = m_connectedUserName;
             v_msg.message = p_msg; 
             InstanceFinder.ServerManager.Broadcast(v_msg);
             Debug.Log("server msg:" + p_msg);
         }
         else if (InstanceFinder.IsClient)
         {
+            v_msg.username = m_connectedUserName;
             v_msg.message = p_msg;
             InstanceFinder.ClientManager.Broadcast(v_msg);
             Debug.Log("client msg:" + p_msg);
         }
     }
+    //instance a new message and display it 
     private void OnMessageRecieved(Message p_msg)
     {
-        GameObject v_finalMsg = Instantiate(m_msgElement, m_chatHolder);
-        //TODO: concatinate the user name and msg 
-        v_finalMsg.GetComponent<TextMeshProUGUI>().text += p_msg.username + ": " + p_msg.message; 
+        GameObject v_finalMsg = Instantiate(m_msgElement, m_chatHolder); //new message
+        
+        v_finalMsg.GetComponent<TextMeshProUGUI>().text = p_msg.username + ": " + p_msg.message; 
     }
 
+    /// <summary>
+    /// call back function to be use on messafe recieved
+    /// </summary>
+    /// <param name="p_networkConnection"></param>
+    /// <param name="p_msg"></param>
     private void OnClientMessageRecieved(NetworkConnection p_networkConnection, Message p_msg)
     {
         InstanceFinder.ServerManager.Broadcast(p_msg);
     }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //if() //TODO
-        //{
-        //    SendMessage();
-        //}
-    }
+  
 }
